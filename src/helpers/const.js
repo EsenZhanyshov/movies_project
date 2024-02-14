@@ -5,3 +5,5 @@ export const ACTIONS = {
   GET_ONE_MOVIE: "GET_ONE_PRODUCT",
   GET_CATEGORIES: "GET_CATEGORIES",
 };
+
+export const ADMIN = "admin@gmail.com";

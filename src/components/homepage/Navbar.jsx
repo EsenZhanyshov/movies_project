@@ -11,11 +11,12 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import TheatersIcon from "@mui/icons-material/Theaters";
+import AdbIcon from "@mui/icons-material/Adb";
+import { useAuth } from "../context/AuthContextProvider";
 import { Link } from "react-router-dom";
+const pages = ["Products", "Pricing", "Blog"];
 
-const pages = ["Movies", "Pricing", "Favourites"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -36,6 +37,9 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
+
+  // ! Логика навбара
+  const { user, handleLogOut } = useAuth();
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -89,10 +93,8 @@ function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.id} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <Link to={page.link}>{page.title}</Link>
-                  </Typography>
+               <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -150,11 +152,28 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              {user ? (
+                <>
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">
+                      <Link to={"/profile"}>Profile</Link>
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">
+                      <Link to={"/auth"}>Logout</Link>
+                    </Typography>
+                  </MenuItem>
+                </>
+              ) : (
+                <>
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">
+                      <Link to={"/auth"}>Login</Link>
+                    </Typography>
+                  </MenuItem>
+                </>
+              )}
             </Menu>
           </Box>
         </Toolbar>

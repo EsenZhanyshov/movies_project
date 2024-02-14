@@ -7,8 +7,10 @@ import CartPage from "../pages/CartPage";
 import AuthPage from "../pages/AuthPage";
 import PricingPage from "../pages/PricingPage";
 import FavoritesPage from "../pages/FavoritesPage";
+import ProfilePage from "../pages/ProfilePage";
 import AdminPage from "../pages/AdminPage";
 import EditPage from "../pages/EditPage";
+
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -18,9 +20,11 @@ const MainRoutes = () => {
     { id: 4, link: "/cart", element: <CartPage /> },
     { id: 5, link: "/auth", element: <AuthPage /> },
     { id: 6, link: "/favorites", element: <FavoritesPage /> },
+    { id: 9, link: "/profile", element: <ProfilePage /> },
     { id: 7, link: "/pricing", element: <PricingPage /> },
     { id: 8, link: "/admin", element: <AdminPage /> },
-    { id: 9, link: "/edit:id", element: <EditPage /> },
+    { id: 10, link: "/edit:id", element: <EditPage /> },
+
   ];
   return (
     <Routes>
