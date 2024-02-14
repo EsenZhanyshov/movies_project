@@ -1,4 +1,23 @@
 {
-  "movies": [],
-  "categories": []
+  "movies": [
+    {
+      "title": "dasdsa",
+      "description": "asd",
+      "category": "",
+      "price": null,
+      "image": "asd",
+      "video": "asd",
+      "id": 1
+    }
+  ],
+  "categories": [
+    {
+      "name": "Ужасы",
+      "id": 1
+    },
+    {
+      "name": "Комедия",
+      "id": 2
+    }
+  ]
 }
