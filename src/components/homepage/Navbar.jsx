@@ -11,12 +11,10 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+import TheatersIcon from "@mui/material/MenuItem";
 import { useAuth } from "../context/AuthContextProvider";
 import { Link } from "react-router-dom";
 const pages = ["Products", "Pricing", "Blog"];
-
-
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -36,7 +34,6 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
 
   // ! Логика навбара
   const { user, handleLogOut } = useAuth();
@@ -93,7 +90,7 @@ function Navbar() {
               }}
             >
               {pages.map((page) => (
-               <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
