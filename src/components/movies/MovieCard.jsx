@@ -30,6 +30,7 @@ const MovieCard = ({ elem }) => {
         boxShadow: "none",
         margin: "2%",
         width: { md: "30vw", lg: "19vw" },
+        gridColumn: "span 1",
       }}
     >
       <CardActionArea onClick={handleOpen}>
@@ -44,6 +45,12 @@ const MovieCard = ({ elem }) => {
         <Typography variant="h5" fontSize="24" fontWeight={700} component="div">
           {elem.title}
         </Typography>
+        <Typography variant="h5" fontSize="14" fontWeight={400} component="div">
+          {elem.category}
+        </Typography>
+        <Button color="primary" variant="outlined" size="medium">
+          В избранное
+        </Button>
         {!open && (
           <>
             <Typography color="black" fontSize="15px" fontWeight={700}>
