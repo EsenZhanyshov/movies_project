@@ -12,15 +12,17 @@ import {
 } from "@mui/material";
 import { AddReaction } from "@mui/icons-material";
 import Detail from "./Detail";
+import { useAuth } from "../context/AuthContextProvider";
+import { ADMIN } from "../../helpers/const";
 
 const MovieCard = ({ elem }) => {
+  const { user } = useAuth();
   const { deleteMovie } = useMovies();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
   return (
     <Card
       sx={{
@@ -54,23 +56,32 @@ const MovieCard = ({ elem }) => {
             <Typography color="black" fontSize="15px" fontWeight={700}>
               {elem.price} сом
             </Typography>
-
-            <Button
-              onClick={() => navigate(`/edit/${elem.id}`)}
-              color="primary"
-              variant="outlined"
-              size="medium"
-            >
-              Редактировать
-            </Button>
-            <Button
-              onClick={() => deleteMovie(elem.id)}
-              color="secondary"
-              variant="outlined"
-              size="medium"
-            >
-              Удалить
-            </Button>
+            {user.email === ADMIN ? (
+              <>
+                <Button
+                  onClick={() => navigate(`/edit/${elem.id}`)}
+                  color="primary"
+                  variant="outlined"
+                  size="medium"
+                >
+                  Редактировать
+                </Button>
+                <Button
+                  onClick={() => deleteMovie(elem.id)}
+                  color="secondary"
+                  variant="outlined"
+                  size="medium"
+                >
+                  Удалить
+                </Button>
+              </>
+            ) : (
+              <>
+                <IconButton>
+                  <AddReaction />
+                </IconButton>
+              </>
+            )}
           </>
         )}
       </CardContent>

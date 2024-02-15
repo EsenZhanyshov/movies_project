@@ -12,10 +12,15 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useAuth } from "../context/AuthContextProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TheatersIcon from "@mui/icons-material/Theaters";
+import { ADMIN } from "../../helpers/const";
 const pages = ["Products", "Pricing", "Blog"];
-
+const page_links = [
+  { id: 1, title: "Movies", link: "/movies" },
+  { id: 2, title: "Pricing", link: "/pricing" },
+  { id: 3, title: "Favorites", link: "/favorites" },
+];
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -34,7 +39,7 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  const navigate = useNavigate();
   // ! Логика навбара
   const { user, handleLogOut } = useAuth();
   return (
@@ -116,21 +121,49 @@ function Navbar() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Button
+              onClick={() => {
+                handleCloseNavMenu();
+                navigate("/movies");
+              }}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Movies
+            </Button>
+            <Button
+              onClick={() => {
+                handleCloseNavMenu();
+                navigate("/pricing");
+              }}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Pricing
+            </Button>
+            <Button
+              onClick={() => {
+                handleCloseNavMenu();
+                navigate("/favorites");
+              }}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Favorites
+            </Button>
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {user ? (
+                  <>
+                    <Avatar alt={user.email} src={user.email} />
+                  </>
+                ) : (
+                  <>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjkzNy1hZXctMTM5LnBuZw.png"
+                    />
+                  </>
+                )}
               </IconButton>
             </Tooltip>
             <Menu
@@ -150,18 +183,38 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {user ? (
-                <>
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">
-                      <Link to={"/profile"}>Profile</Link>
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">
-                      <Link to={"/auth"}>Logout</Link>
-                    </Typography>
-                  </MenuItem>
-                </>
+                user.email === ADMIN ? (
+                  <>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">
+                        <Link to={"/profile"}>Profile</Link>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center" onClick={handleLogOut}>
+                        <Link to={"/auth"}>Logout</Link>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">
+                        <Link to={"/admin"}>Admin Panel</Link>
+                      </Typography>
+                    </MenuItem>
+                  </>
+                ) : (
+                  <>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">
+                        <Link to={"/profile"}>Profile</Link>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center" onClick={handleLogOut}>
+                        <Link to={"/auth"}>Logout</Link>
+                      </Typography>
+                    </MenuItem>
+                  </>
+                )
               ) : (
                 <>
                   <MenuItem onClick={handleCloseUserMenu}>
