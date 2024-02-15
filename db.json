@@ -44,6 +44,15 @@
       "image": "https://oc.kg/media/thumbnails/5/6/56fcbe3d45e28b52d01a23aa3961fafa_200x300.jpg",
       "video": "https://p1.oc.kg:8082/video/d/hd2/WonkaHD.mp4?an=1",
       "id": 5
+    },
+    {
+      "title": "Аквамен и потерянное царство",
+      "description": "Над Атлантидой нависла новая угроза, способная привести к необратимой катастрофе. Даже Аквамен не сможет справиться в одиночку – ему предстоит заключить неожиданный союз ради спасения своего королевства.",
+      "category": "Фантастика",
+      "price": 200,
+      "image": "https://oc.kg/media/thumbnails/0/c/0c28ae769d9b619f3a772647c85fb906_200x270.jpg",
+      "video": "https://p1.oc.kg:8082/video/d/hd2/Aquaman2HD.mp4?an=1",
+      "id": 6
     }
   ],
   "categories": [
