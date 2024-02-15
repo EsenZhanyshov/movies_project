@@ -1,13 +1,40 @@
 {
   "movies": [
     {
-      "title": "dasdsa",
-      "description": "asd",
-      "category": "",
-      "price": null,
-      "image": "asd",
-      "video": "asd",
+      "title": "Меч короля Артура",
+      "description": "Молодой Артур",
+      "category": "Фантастика",
+      "price": 100,
+      "image": "https://oc.kg/media/images/9/4/94b1d9e856fb2f132d627e0d79867866/image.jpg",
+      "video": "https://www.youtube.com/watch?v=u5RfpjRCpPU&ab_channel=%D0%9A%D0%98%D0%9D%D0%9E%D0%9C%D0%90%D0%9D",
       "id": 1
+    },
+    {
+      "title": "Карты, деньги, два ствола(1998)",
+      "description": "ddd",
+      "category": "Комедия",
+      "price": 120,
+      "image": "https://oc.kg/media/images/3/8/38d8bc09148f4f7779690f2befa5019d/image.jpg",
+      "video": "",
+      "id": 2
+    },
+    {
+      "title": "Шерлок Холмс (2009)",
+      "description": "Величайший в истории сыщик Шерлок Холмс вместе со своим верным соратником Ватсоном вступают в схватку, требующую нешуточной физической и умственной подготовки, ведь их враг представляет угрозу для всего Лондона.",
+      "category": "Детектив",
+      "price": 120,
+      "image": "https://oc.kg/media/thumbnails/1/5/1580049c577ec65a54213f3d02c88aaa_200x292.jpg",
+      "video": "",
+      "id": 3
+    },
+    {
+      "title": "Один дома(1990)",
+      "description": "Американское семейство отправляется из Чикаго в Европу, но в спешке сборов бестолковые родители забывают дома… одного из своих детей. Юное создание, однако, не теряется и демонстрирует чудеса изобретательности. И когда в дом залезают грабители, им приходится не раз пожалеть о встрече с милым крошкой.",
+      "category": "Комедия",
+      "price": 200,
+      "image": "https://oc.kg/media/images/1/9/19f8a097c0dc024dcf98b6965f0a6817/image.jpg",
+      "video": "https://youtu.be/0zMLl9WbHVg",
+      "id": 4
     }
   ],
   "categories": [
@@ -18,6 +45,14 @@
     {
       "name": "Комедия",
       "id": 2
+    },
+    {
+      "name": "Фантастика",
+      "id": 3
+    },
+    {
+      "name": "Детектив",
+      "id": 4
     }
   ]
 }
