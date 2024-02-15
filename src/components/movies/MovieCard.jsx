@@ -12,15 +12,17 @@ import {
 } from "@mui/material";
 import { AddReaction } from "@mui/icons-material";
 import Detail from "./Detail";
+import { useAuth } from "../context/AuthContextProvider";
+import { ADMIN } from "../../helpers/const";
 
 const MovieCard = ({ elem }) => {
+  const { user } = useAuth();
   const { deleteMovie } = useMovies();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
   return (
     <Card
       sx={{
@@ -28,6 +30,7 @@ const MovieCard = ({ elem }) => {
         boxShadow: "none",
         margin: "2%",
         width: { md: "30vw", lg: "19vw" },
+        gridColumn: "span 1",
       }}
     >
       <CardActionArea onClick={handleOpen}>
@@ -42,32 +45,43 @@ const MovieCard = ({ elem }) => {
         <Typography variant="h5" fontSize="24" fontWeight={700} component="div">
           {elem.title}
         </Typography>
+        <Typography variant="h5" fontSize="14" fontWeight={400} component="div">
+          {elem.category}
+        </Typography>
+        <Button color="primary" variant="outlined" size="medium">
+          В избранное
+        </Button>
         {!open && (
           <>
             <Typography color="black" fontSize="15px" fontWeight={700}>
               {elem.price} сом
             </Typography>
-
-            <Button
-              onClick={() => navigate(`/edit/${elem.id}`)}
-              color="primary"
-              variant="outlined"
-              size="medium"
-            >
-              Редактировать
-            </Button>
-            <Button
-              onClick={() => deleteMovie(elem.id)}
-              color="secondary"
-              variant="outlined"
-              size="medium"
-            >
-              Удалить
-            </Button>
-
-            <IconButton>
-              <AddReaction />
-            </IconButton>
+            {user.email === ADMIN ? (
+              <>
+                <Button
+                  onClick={() => navigate(`/edit/${elem.id}`)}
+                  color="primary"
+                  variant="outlined"
+                  size="medium"
+                >
+                  Редактировать
+                </Button>
+                <Button
+                  onClick={() => deleteMovie(elem.id)}
+                  color="secondary"
+                  variant="outlined"
+                  size="medium"
+                >
+                  Удалить
+                </Button>
+              </>
+            ) : (
+              <>
+                <IconButton>
+                  <AddReaction />
+                </IconButton>
+              </>
+            )}
           </>
         )}
       </CardContent>

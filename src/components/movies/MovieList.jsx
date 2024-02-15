@@ -13,7 +13,7 @@ const MovieList = () => {
   }, [searchParams]);
   //! PAGINATION
   const [page, setPage] = useState(1);
-  const itemPerPage = 10;
+  const itemPerPage = 8;
   const count = Math.ceil(movies.length / itemPerPage);
   console.log(count);
   const currentData = () => {
@@ -27,12 +27,24 @@ const MovieList = () => {
   console.log(currentData());
   return (
     <div>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "10px",
+          height: "auto",
+        }}
+      >
         {currentData().map((elem) => (
           <MovieCard key={elem.id} elem={elem} />
         ))}
       </Box>
-      <Pagination count={count} page={page} handleChange={handleChange} />
+      <Pagination
+        count={count}
+        page={page}
+        handleChange={handleChange}
+        style={{ marginTop: "20px" }}
+      />
     </div>
   );
 };
