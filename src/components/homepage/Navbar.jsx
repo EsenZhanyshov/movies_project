@@ -11,6 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import TheatersIcon from "@mui/material/MenuItem";
 import { useAuth } from "../context/AuthContextProvider";
 import { Link } from "react-router-dom";
 import TheatersIcon from "@mui/icons-material/Theaters";
