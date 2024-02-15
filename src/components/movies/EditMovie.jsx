@@ -11,7 +11,6 @@ const EditMovie = () => {
     description: "",
     price: 0,
     image: "",
-    video: "",
   });
   const handleInput = (e) => {
     if (e.target.name === "price") {

@@ -4,7 +4,7 @@ import React from "react";
 const Detail = (props) => {
   const style = {
     position: "absolute",
-    top: "30%",
+    top: "15%",
     left: "30%",
     width: 700,
     display: "flex",
@@ -23,15 +23,19 @@ const Detail = (props) => {
     >
       <Box sx={style}>
         <div>
-          <img width={300} src={elem.image} alt={elem.title} />
+          {/* Используем тег <video> для отображения видео */}
+          <video width={300} controls>
+            <source src={elem.video} type="video/mp4" />
+            Ваш браузер не поддерживает видео в формате mp4.
+          </video>
         </div>
-        <div>
+        <div style={{ marginLeft: 20 }}>
           <h1>{elem.title}</h1>
           <p>{elem.description}</p>
-          <p>{elem.price}</p>
-        </div>
-        <div style={{ marginTop: "auto" }}>
-          <Button>Buy for {elem.price}</Button>
+          <p style={{ fontWeight: "bold" }}>{elem.price} сом</p>
+          <div style={{ marginTop: 20 }}>
+            <Button>Купить за {elem.price} сом</Button>
+          </div>
         </div>
       </Box>
     </Modal>
