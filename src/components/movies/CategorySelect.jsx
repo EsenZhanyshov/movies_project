@@ -1,8 +1,14 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 const CategorySelect = (props) => {
   const { categories, handleInput } = props;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
