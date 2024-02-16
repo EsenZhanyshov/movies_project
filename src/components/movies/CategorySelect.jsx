@@ -11,27 +11,22 @@ const CategorySelect = (props) => {
 
   return (
     <Box sx={{ minWidth: 120 }}>
-      {isOpen && (
-
-  return (
-    <Box sx={{ minWidth: 120 }}>
-
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Choose Category</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label="Category"
-            name="category"
-            onChange={handleInput}
-          >
-            {categories.map((elem) => (
-              <MenuItem key={elem.id} value={elem.name}>
-                {elem.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Choose Category</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          label="Category"
+          name="category"
+          onChange={handleInput}
+        >
+          {categories.map((elem) => (
+            <MenuItem key={elem.id} value={elem.name}>
+              {elem.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </Box>
   );
 };

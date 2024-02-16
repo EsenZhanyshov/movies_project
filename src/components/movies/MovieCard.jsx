@@ -111,10 +111,6 @@ const MovieCard = ({ elem }) => {
               </>
             )}
 
-            <Typography color="black" fontSize="15px" fontWeight={700}>
-              {elem.price} сом
-            </Typography>
-
             {user.email === ADMIN ? (
               <>
                 <Button
@@ -135,11 +131,7 @@ const MovieCard = ({ elem }) => {
                 </Button>
               </>
             ) : (
-              <>
-                <IconButton>
-                  <AddReaction />
-                </IconButton>
-              </>
+              <></>
             )}
           </>
         )}
