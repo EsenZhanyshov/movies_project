@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMovies } from "../context/MovieContextProvider";
 import { useNavigate } from "react-router-dom";
 import {
@@ -20,9 +20,23 @@ const MovieCard = ({ elem }) => {
   const { deleteMovie } = useMovies();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const storedFavorite = localStorage.getItem(`favorite_${elem.id}`);
+    if (storedFavorite === "true") {
+      setIsFavorite(true);
+    }
+  }, [elem.id]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleToggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    localStorage.setItem(`favorite_${elem.id}`, !isFavorite);
+  };
+
   return (
     <Card
       sx={{
@@ -48,14 +62,45 @@ const MovieCard = ({ elem }) => {
         <Typography variant="h5" fontSize="14" fontWeight={400} component="div">
           {elem.category}
         </Typography>
-        <Button color="primary" variant="outlined" size="medium">
-          В избранное
-        </Button>
+        {user.email === ADMIN ? (
+          <></>
+        ) : (
+          <Button
+            color="primary"
+            variant={isFavorite ? "contained" : "outlined"}
+            size="medium"
+            onClick={handleToggleFavorite}
+          >
+            В избранное
+          </Button>
+        )}
+
         {!open && (
           <>
-            <Typography color="black" fontSize="15px" fontWeight={700}>
-              {elem.price} сом
-            </Typography>
+            {elem.price > 0 ? (
+              <>
+                <Button
+                  onClick={() => navigate()}
+                  color="primary"
+                  variant="outlined"
+                  size="medium"
+                >
+                  купить за {elem.price} сом
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  onClick={() => navigate()}
+                  color="primary"
+                  variant="outlined"
+                  size="medium"
+                >
+                  Смотреть бесплано
+                </Button>
+              </>
+            )}
+
             {user.email === ADMIN ? (
               <>
                 <Button

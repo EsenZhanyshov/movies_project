@@ -15,6 +15,8 @@ import { useAuth } from "../context/AuthContextProvider";
 import { Link, useNavigate } from "react-router-dom";
 import TheatersIcon from "@mui/icons-material/Theaters";
 import { ADMIN } from "../../helpers/const";
+import { AddShoppingCart, AddShoppingCartSharp } from "@mui/icons-material";
+
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -136,8 +138,21 @@ function Navbar() {
             >
               Избранное
             </Button>
+            <Button
+              onClick={() => {
+                handleCloseNavMenu();
+                navigate("/cart");
+              }}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Basket
+            </Button>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
+            <IconButton>
+              <AddShoppingCart />
+            </IconButton>
+
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {user ? (
