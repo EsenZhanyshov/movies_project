@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMovies } from "../context/MovieContextProvider";
 import { useNavigate } from "react-router-dom";
 import {
@@ -20,10 +20,21 @@ const MovieCard = ({ elem }) => {
   const { deleteMovie } = useMovies();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const storedFavorite = localStorage.getItem(`favorite_${elem.id}`);
+    if (storedFavorite === "true") {
+      setIsFavorite(true);
+    }
+  }, [elem.id]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const handleToggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    localStorage.setItem(`favorite_${elem.id}`, !isFavorite);
+  };
   return (
     <Card
       sx={{
