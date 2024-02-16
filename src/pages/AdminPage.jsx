@@ -8,7 +8,15 @@ const AdminPage = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "flex-start",
+        backgroundImage: `url('https://images.wallpapershq.com/wallpapers/1432/wallpaper_1432_1920x1080.jpg')`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
       <Button onClick={handleOpen} variant="contained">
         Add Category
       </Button>

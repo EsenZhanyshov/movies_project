@@ -3,6 +3,7 @@ import { useMovies } from "../context/MovieContextProvider";
 import { useSearchParams } from "react-router-dom";
 import MovieCard from "./MovieCard";
 import { Box, Pagination } from "@mui/material";
+import PaginationControlled from "./PaginationControlled";
 
 const MovieList = () => {
   //! SEARCH
@@ -39,7 +40,7 @@ const MovieList = () => {
           <MovieCard key={elem.id} elem={elem} />
         ))}
       </Box>
-      <Pagination
+      <PaginationControlled
         count={count}
         page={page}
         handleChange={handleChange}
