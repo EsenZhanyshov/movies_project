@@ -36,7 +36,7 @@ const Auth = () => {
     console.log(event);
   };
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{ mt: "8%" }}>
       <Box
         sx={{
           marginTop: "8",
@@ -48,7 +48,7 @@ const Auth = () => {
         <Avatar sx={{ margin: "1", bgcolor: "secondary" }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" color="blue">
           {hasAccount ? "Login Form" : "Register Now"}
         </Typography>
         <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit}>
@@ -106,7 +106,10 @@ const Auth = () => {
             <Typography
               variant="body2"
               onClick={() => setHasAccount(!hasAccount)}
-              sx={{ cursor: "pointer", textDecoration: "underline" }}
+              sx={{
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
             >
               {hasAccount
                 ? `Dont have an account? Register Now`
