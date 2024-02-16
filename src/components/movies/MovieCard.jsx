@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMovies } from "../context/MovieContextProvider";
 import { useNavigate } from "react-router-dom";
 import {
@@ -16,6 +16,7 @@ import { useAuth } from "../context/AuthContextProvider";
 import { ADMIN } from "../../helpers/const";
 
 const MovieCard = ({ elem }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
   const { user } = useAuth();
   const { deleteMovie } = useMovies();
   const navigate = useNavigate();
@@ -23,6 +24,16 @@ const MovieCard = ({ elem }) => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const addToFavorites = () => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const updatedFavorites = isFavorite
+      ? favorites.filter((id) => id !== elem.id)
+      : [...favorites, elem.id];
+
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    setIsFavorite(!isFavorite);
+  };
   return (
     <Card
       sx={{
@@ -48,8 +59,14 @@ const MovieCard = ({ elem }) => {
         <Typography variant="h5" fontSize="14" fontWeight={400} component="div">
           {elem.category}
         </Typography>
-        <Button color="primary" variant="outlined" size="medium">
-          В избранное
+        {/* работать здесь */}
+        <Button
+          color="primary"
+          variant="outlined"
+          size="medium"
+          onClick={addToFavorites}
+        >
+          {isFavorite ? "Убрать из избранного" : "В избранное"}
         </Button>
         {!open && (
           <>
