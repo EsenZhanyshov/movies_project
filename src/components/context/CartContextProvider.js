@@ -5,23 +5,26 @@ import {
   calcTotalPrice,
   getLocalStorage,
   getProductsCountInCart,
-} from "../../helpers/functions";
+} from "../../helpers/functions.js";
+
 const cartContext = createContext();
 export const useCart = () => useContext(cartContext);
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case ACTIONS.GET_CART:
+      return { ...state, cart: action.payload };
+    default:
+      return state;
+  }
+};
 
 const CartContextProvider = ({ children }) => {
   const INIT_STATE = {
     cart: JSON.parse(localStorage.getItem("cart")),
-    cartLength: getProductsCountInCart,
+    cartLength: getProductsCountInCart(),
   };
-  const reducer = (state = INIT_STATE, action) => {
-    switch (action.type) {
-      case ACTIONS.GET_CART:
-        return { ...state, cart: action.payload };
-      default:
-        return state;
-    }
-  };
+
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
   //! GET
@@ -34,47 +37,45 @@ const CartContextProvider = ({ children }) => {
       localStorage.setItem(
         "cart",
         JSON.stringify({
-          products: [],
+          movies: [],
           totalPrice: 0,
         })
       );
       cart = {
-        products: [],
+        movies: [],
         totalPrice: 0,
       };
     }
-
     // обновляем состояние
     dispatch({
       type: ACTIONS.GET_CART,
       payload: cart,
     });
   };
+
   //! CREATE
   // функция для добавления товара в корзину
   const addProductToCart = (product) => {
     // получаем содержимое из хранилища под ключом cart
     let cart = getLocalStorage();
-    // проверка на существование данных в хранилище под ключом cart
-    if (!cart) {
+    // проверка на существование данных в хранилище под ключом cart и наличие массива movies
+    if (!cart || !cart.movies) {
       cart = {
         movies: [],
         totalPrice: 0,
       };
     }
-    // создаем обьект, который добавим в localStorage в массив cart.products
+    // создаем объект, который добавим в localStorage в массив cart.movies
     let newProduct = {
       item: product,
       count: 1,
       subPrice: product.price,
     };
-
     // проверяем есть ли уже продукт, который хотим добавить в корзину
-    let productToFind = cart.movies.filter(
-      (elem) => elem.item.id === product.id
-    );
-    // если товар уже добавлен в корзину, то удаляем его из массива cart.products через фильтр, в противном случае добавляем его  cart.products
-    if (productToFind.length === 0) {
+    let productToFind =
+      cart.movies && cart.movies.find((elem) => elem.item.id === product.id);
+    // если товар уже добавлен в корзину, то удаляем его из массива cart.movies через фильтр, в противном случае добавляем его  cart.movies
+    if (!productToFind) {
       cart.movies.push(newProduct);
     } else {
       cart.movies = cart.movies.filter((elem) => elem.item.id !== product.id);
@@ -89,6 +90,7 @@ const CartContextProvider = ({ children }) => {
       payload: cart,
     });
   };
+
   // функция для проверки на наличие товара в корзине
   const checkProductInCart = (id) => {
     let cart = getLocalStorage();
@@ -97,6 +99,7 @@ const CartContextProvider = ({ children }) => {
       return newCart.length > 0 ? true : false;
     }
   };
+
   // функция для изменения стоимости за одну позицию
   const changeProductCount = (id, count) => {
     // получаем данные корзины из localStorage
@@ -118,6 +121,7 @@ const CartContextProvider = ({ children }) => {
       payload: cart,
     });
   };
+
   //! DELETE
   const deleteProductFromCart = (id) => {
     let cart = getLocalStorage();
@@ -129,6 +133,7 @@ const CartContextProvider = ({ children }) => {
       payload: cart,
     });
   };
+
   const values = {
     addProductToCart,
     cart: state.cart,
@@ -138,6 +143,7 @@ const CartContextProvider = ({ children }) => {
     changeProductCount,
     deleteProductFromCart,
   };
+
   return <cartContext.Provider value={values}>{children}</cartContext.Provider>;
 };
 

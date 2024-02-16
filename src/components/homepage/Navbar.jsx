@@ -11,15 +11,24 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAuth } from "../context/AuthContextProvider";
 import { Link, useNavigate } from "react-router-dom";
 import TheatersIcon from "@mui/icons-material/Theaters";
 import { ADMIN } from "../../helpers/const";
 import { AddShoppingCart, AddShoppingCartSharp } from "@mui/icons-material";
+import { useCart } from "../context/CartContextProvider";
+import { Badge } from "@mui/material";
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const { addProductToCart, getProductsCountInCart } = useCart();
+  const [badgeCount, setBadgeCount] = React.useState(0);
+  React.useEffect(() => {
+    setBadgeCount(getProductsCountInCart());
+  }, [addProductToCart]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -138,20 +147,13 @@ function Navbar() {
             >
               Избранное
             </Button>
-            <Button
-              onClick={() => {
-                handleCloseNavMenu();
-                navigate("/cart");
-              }}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              Basket
-            </Button>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton>
-              <AddShoppingCart />
-            </IconButton>
+            <Link to={"/cart"}>
+              <Badge badgeContent={badgeCount} color="success">
+                <ShoppingCartIcon sx={{ color: "white" }} />
+              </Badge>
+            </Link>
 
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

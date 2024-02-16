@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const CategorySelect = (props) => {
   const { categories, handleInput } = props;
-  const [isOpen, setIsOpen] = useState(false); // Состояние для отслеживания видимости компонента
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -11,7 +11,6 @@ const CategorySelect = (props) => {
 
   return (
     <Box sx={{ minWidth: 120 }}>
-      <CategorySelect onClick={toggleMenu} style={{ cursor: "pointer" }} />{" "}
       {isOpen && (
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Choose Category</InputLabel>

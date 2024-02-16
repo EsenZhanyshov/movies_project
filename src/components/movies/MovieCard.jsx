@@ -14,8 +14,11 @@ import { AddReaction } from "@mui/icons-material";
 import Detail from "./Detail";
 import { useAuth } from "../context/AuthContextProvider";
 import { ADMIN } from "../../helpers/const";
+import { useCart } from "../context/CartContextProvider";
 
 const MovieCard = ({ elem }) => {
+  const { addProductToCart, checkProductInCart, deleteProductFromCart } =
+    useCart();
   const { user } = useAuth();
   const { deleteMovie } = useMovies();
   const navigate = useNavigate();
@@ -80,7 +83,9 @@ const MovieCard = ({ elem }) => {
             {elem.price > 0 ? (
               <>
                 <Button
-                  onClick={() => navigate()}
+                  onClick={() => {
+                    addProductToCart(elem);
+                  }}
                   color="primary"
                   variant="outlined"
                   size="medium"
