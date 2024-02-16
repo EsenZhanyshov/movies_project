@@ -76,11 +76,7 @@ const MovieCard = ({ elem }) => {
                 </Button>
               </>
             ) : (
-              <>
-                <IconButton>
-                  <AddReaction />
-                </IconButton>
-              </>
+              <></>
             )}
           </>
         )}
