@@ -17,10 +17,8 @@ const MovieCard2 = ({ elem }) => {
   const addToFavorites = () => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     const updatedFavorites = favorites.filter((id) => id !== elem.id);
-
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
-
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setIsFavorite(favorites.includes(elem.id));
