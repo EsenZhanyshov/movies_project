@@ -17,7 +17,7 @@ const AdminPage = () => {
         backgroundSize: "cover",
       }}
     >
-      <Button onClick={handleOpen} variant="contained">
+      <Button onClick={handleOpen} variant="contained" style={{position:"absolute"}}>
         Add Category
       </Button>
       <AddMovie />/

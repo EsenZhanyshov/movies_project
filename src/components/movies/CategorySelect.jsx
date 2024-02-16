@@ -12,6 +12,10 @@ const CategorySelect = (props) => {
   return (
     <Box sx={{ minWidth: 120 }}>
       {isOpen && (
+
+  return (
+    <Box sx={{ minWidth: 120 }}>
+
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Choose Category</InputLabel>
           <Select
@@ -28,7 +32,6 @@ const CategorySelect = (props) => {
             ))}
           </Select>
         </FormControl>
-      )}
     </Box>
   );
 };

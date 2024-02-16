@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMovies } from "../context/MovieContextProvider";
 import { useNavigate } from "react-router-dom";
 import {
@@ -19,11 +19,12 @@ import { useCart } from "../context/CartContextProvider";
 const MovieCard = ({ elem }) => {
   const { addProductToCart, checkProductInCart, deleteProductFromCart } =
     useCart();
+  const [isFavorite, setIsFavorite] = useState(false);
+
   const { user } = useAuth();
   const { deleteMovie } = useMovies();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const storedFavorite = localStorage.getItem(`favorite_${elem.id}`);
@@ -35,19 +36,28 @@ const MovieCard = ({ elem }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleToggleFavorite = () => {
+  const addToFavorites = () => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const updatedFavorites = isFavorite
+      ? favorites.filter((id) => id !== elem.id)
+      : [...favorites, elem.id];
+
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     setIsFavorite(!isFavorite);
-    localStorage.setItem(`favorite_${elem.id}`, !isFavorite);
+    localStorage.setItem(`favorite_${elem.id}`, JSON.stringify(!isFavorite));
   };
 
   return (
     <Card
       sx={{
-        height: 600,
+        height: "100%",
         boxShadow: "none",
         margin: "2%",
         width: { md: "30vw", lg: "19vw" },
         gridColumn: "span 1",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
       }}
     >
       <CardActionArea onClick={handleOpen}>
@@ -65,19 +75,14 @@ const MovieCard = ({ elem }) => {
         <Typography variant="h5" fontSize="14" fontWeight={400} component="div">
           {elem.category}
         </Typography>
-        {user.email === ADMIN ? (
-          <></>
-        ) : (
-          <Button
-            color="primary"
-            variant={isFavorite ? "contained" : "outlined"}
-            size="medium"
-            onClick={handleToggleFavorite}
-          >
-            В избранное
-          </Button>
-        )}
-
+        <Button
+          color="primary"
+          variant="outlined"
+          size="medium"
+          onClick={addToFavorites}
+        >
+          {isFavorite ? "Убрать из избранного" : "В избранное"}
+        </Button>
         {!open && (
           <>
             {elem.price > 0 ? (
@@ -106,6 +111,10 @@ const MovieCard = ({ elem }) => {
               </>
             )}
 
+            <Typography color="black" fontSize="15px" fontWeight={700}>
+              {elem.price} сом
+            </Typography>
+
             {user.email === ADMIN ? (
               <>
                 <Button
@@ -126,7 +135,11 @@ const MovieCard = ({ elem }) => {
                 </Button>
               </>
             ) : (
-              <></>
+              <>
+                <IconButton>
+                  <AddReaction />
+                </IconButton>
+              </>
             )}
           </>
         )}
