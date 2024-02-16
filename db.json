@@ -7,7 +7,7 @@
       "price": 100,
       "image": "https://oc.kg/media/images/9/4/94b1d9e856fb2f132d627e0d79867866/image.jpg",
       "video": "https://p1.oc.kg:8082/video/a/hd4/Mech_korolya_aRTURA720.mp4?an=0",
-      "id": 1
+      "id": "1"
     },
     {
       "title": "Карты, деньги, два ствола(1998)",
@@ -16,7 +16,7 @@
       "price": 120,
       "image": "https://oc.kg/media/images/3/8/38d8bc09148f4f7779690f2befa5019d/image.jpg",
       "video": "https://p1.oc.kg:8082/video/a/24/Lock_Stock_and_2Smoking.mp4?an=0",
-      "id": 2
+      "id": "2"
     },
     {
       "title": "Шерлок Холмс (2009)",
@@ -25,7 +25,7 @@
       "price": 120,
       "image": "https://oc.kg/media/thumbnails/1/5/1580049c577ec65a54213f3d02c88aaa_200x292.jpg",
       "video": "https://p1.oc.kg:8082/video/d/13/Sherlok_Holms_2009.mp4?an=0",
-      "id": 3
+      "id": "3"
     },
     {
       "title": "Один дома(1990)",
@@ -34,7 +34,7 @@
       "price": 200,
       "image": "https://oc.kg/media/images/1/9/19f8a097c0dc024dcf98b6965f0a6817/image.jpg",
       "video": "https://p1.oc.kg:8082/video/e/22/Odin_doma_1990.mp4?an=0",
-      "id": 4
+      "id": "4"
     },
     {
       "title": "Вонка (2023)",
@@ -43,7 +43,7 @@
       "price": 150,
       "image": "https://oc.kg/media/thumbnails/5/6/56fcbe3d45e28b52d01a23aa3961fafa_200x300.jpg",
       "video": "https://p1.oc.kg:8082/video/d/hd2/WonkaHD.mp4?an=1",
-      "id": 5
+      "id": "5"
     },
     {
       "title": "Аквамен и потерянное царство",
@@ -52,7 +52,7 @@
       "price": 200,
       "image": "https://oc.kg/media/thumbnails/0/c/0c28ae769d9b619f3a772647c85fb906_200x270.jpg",
       "video": "https://p1.oc.kg:8082/video/d/hd2/Aquaman2HD.mp4?an=1",
-      "id": 6
+      "id": "6"
     },
     {
       "title": "Дитя чудовища",
@@ -61,7 +61,7 @@
       "price": 120,
       "image": "https://oc.kg/media/thumbnails/0/e/0e8ac853410f93ffa6a2f6c43c6286d7_200x282.jpg",
       "video": "https://p1.oc.kg:8082/video/b/hd/Bakemono.mp4?an=0",
-      "id": 7
+      "id": "7"
     },
     {
       "title": "Оппенгеймер",
@@ -70,7 +70,7 @@
       "price": 220,
       "image": "https://oc.kg/media/thumbnails/e/6/e6f6b39132b8f02d63f70234a1ac2928_200x300.jpg",
       "video": "https://p1.oc.kg:8082/video/f/hd2/Oppenheimer_HD.mp4?an=0",
-      "id": 8
+      "id": "8"
     },
     {
       "title": "Астрал",
@@ -79,33 +79,33 @@
       "price": 170,
       "image": "https://oc.kg/media/thumbnails/c/6/c6bceade126fcdf5aa4916c32196fecc_200x284.jpg",
       "video": "https://p1.oc.kg:8082/video/d/19/Insidious.mp4?an=0",
-      "id": 9
+      "id": "9"
     }
   ],
   "categories": [
     {
       "name": "Ужасы",
-      "id": 1
+      "id": "1"
     },
     {
       "name": "Комедия",
-      "id": 2
+      "id": "2"
     },
     {
       "name": "Фантастика",
-      "id": 3
+      "id": "3"
     },
     {
       "name": "Детектив",
-      "id": 4
+      "id": "4"
     },
     {
       "name": "Аниме",
-      "id": 5
+      "id": "5"
     },
     {
       "name": "История",
-      "id": 6
+      "id": "6"
     }
   ]
 }

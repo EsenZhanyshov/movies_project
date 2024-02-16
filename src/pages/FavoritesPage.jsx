@@ -9,6 +9,8 @@ const FavoritesPage = () => {
         backgroundImage: `url('https://images.wallpapershq.com/wallpapers/1432/wallpaper_1432_1920x1080.jpg')`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
+        width: "100vw", // Добавленная ширина
+        height: "90vh", // Добавленная высота
       }}
     ></div>
   );
