@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer, useState } from "react";
 import { ACTIONS, API, API_CATEGORIES } from "../../helpers/const";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -81,6 +81,7 @@ const MovieContextProvider = ({ children }) => {
     const url = `${window.location.pathname}?${search}`;
     navigate(url);
   };
+
   const values = {
     addMovie,
     getMovies,

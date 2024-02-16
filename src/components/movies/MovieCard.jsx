@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMovies } from "../context/MovieContextProvider";
 import { useNavigate } from "react-router-dom";
 import {
@@ -16,6 +16,7 @@ import { useAuth } from "../context/AuthContextProvider";
 import { ADMIN } from "../../helpers/const";
 
 const MovieCard = ({ elem }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
   const { user } = useAuth();
   const { deleteMovie } = useMovies();
   const navigate = useNavigate();
@@ -31,6 +32,15 @@ const MovieCard = ({ elem }) => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const addToFavorites = () => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const updatedFavorites = isFavorite
+      ? favorites.filter((id) => id !== elem.id)
+      : [...favorites, elem.id];
+
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    setIsFavorite(!isFavorite);
   const handleToggleFavorite = () => {
     setIsFavorite(!isFavorite);
     localStorage.setItem(`favorite_${elem.id}`, !isFavorite);
@@ -57,6 +67,55 @@ const MovieCard = ({ elem }) => {
         />
       </CardActionArea>
       <CardContent sx={{ padding: "20px 5px 0px 5px" }}>
+        <Typography variant="h5" fontSize="24" fontWeight={700} component="div">
+          {elem.title}
+        </Typography>
+        <Typography variant="h5" fontSize="14" fontWeight={400} component="div">
+          {elem.category}
+        </Typography>
+        {/* работать здесь */}
+        <Button
+          color="primary"
+          variant="outlined"
+          size="medium"
+          onClick={addToFavorites}
+        >
+          {isFavorite ? "Убрать из избранного" : "В избранное"}
+        </Button>
+        {!open && (
+          <>
+            <Typography color="black" fontSize="15px" fontWeight={700}>
+              {elem.price} сом
+            </Typography>
+            {user.email === ADMIN ? (
+              <>
+                <Button
+                  onClick={() => navigate(`/edit/${elem.id}`)}
+                  color="primary"
+                  variant="outlined"
+                  size="medium"
+                >
+                  Редактировать
+                </Button>
+                <Button
+                  onClick={() => deleteMovie(elem.id)}
+                  color="secondary"
+                  variant="outlined"
+                  size="medium"
+                >
+                  Удалить
+                </Button>
+              </>
+            ) : (
+              <>
+                <IconButton>
+                  <AddReaction />
+                </IconButton>
+              </>
+            )}
+          </>
+        )}
+
         <div style={{ flex: "1 1 auto" }}> {/* Создаем блок, который будет занимать оставшееся пространство */}
           <Typography variant="h5" fontSize="24" fontWeight={700} component="div">
             {elem.title}
@@ -99,6 +158,7 @@ const MovieCard = ({ elem }) => {
             </>
           )}
         </div>
+
       </CardContent>
       <Detail open={open} handleClose={handleClose} elem={elem} />
     </Card>
