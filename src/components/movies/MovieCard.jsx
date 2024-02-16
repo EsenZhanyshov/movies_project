@@ -14,9 +14,13 @@ import { AddReaction } from "@mui/icons-material";
 import Detail from "./Detail";
 import { useAuth } from "../context/AuthContextProvider";
 import { ADMIN } from "../../helpers/const";
+import { useCart } from "../context/CartContextProvider";
 
 const MovieCard = ({ elem }) => {
+  const { addProductToCart, checkProductInCart, deleteProductFromCart } =
+    useCart();
   const [isFavorite, setIsFavorite] = useState(false);
+
   const { user } = useAuth();
   const { deleteMovie } = useMovies();
   const navigate = useNavigate();
@@ -81,9 +85,36 @@ const MovieCard = ({ elem }) => {
         </Button>
         {!open && (
           <>
+            {elem.price > 0 ? (
+              <>
+                <Button
+                  onClick={() => {
+                    addProductToCart(elem);
+                  }}
+                  color="primary"
+                  variant="outlined"
+                  size="medium"
+                >
+                  купить за {elem.price} сом
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  onClick={() => navigate()}
+                  color="primary"
+                  variant="outlined"
+                  size="medium"
+                >
+                  Смотреть бесплано
+                </Button>
+              </>
+            )}
+
             <Typography color="black" fontSize="15px" fontWeight={700}>
               {elem.price} сом
             </Typography>
+
             {user.email === ADMIN ? (
               <>
                 <Button

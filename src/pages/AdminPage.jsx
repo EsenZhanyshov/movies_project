@@ -20,7 +20,7 @@ const AdminPage = () => {
       <Button onClick={handleOpen} variant="contained" style={{position:"absolute"}}>
         Add Category
       </Button>
-      <AddMovie />
+      <AddMovie />/
       <AddCategory open={open} handleClose={handleClose} />
     </div>
   );

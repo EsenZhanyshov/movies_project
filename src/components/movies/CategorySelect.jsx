@@ -3,9 +3,19 @@ import React, { useState } from "react";
 
 const CategorySelect = (props) => {
   const { categories, handleInput } = props;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <Box sx={{ minWidth: 120 }}>
+      {isOpen && (
+
+  return (
+    <Box sx={{ minWidth: 120 }}>
+
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Choose Category</InputLabel>
           <Select
