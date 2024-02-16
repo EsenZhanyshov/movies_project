@@ -15,12 +15,8 @@ import { useAuth } from "../context/AuthContextProvider";
 import { Link, useNavigate } from "react-router-dom";
 import TheatersIcon from "@mui/icons-material/Theaters";
 import { ADMIN } from "../../helpers/const";
-const pages = ["Products", "Pricing", "Blog"];
-const page_links = [
-  { id: 1, title: "Movies", link: "/movies" },
-  { id: 2, title: "Pricing", link: "/pricing" },
-  { id: 3, title: "Favorites", link: "/favorites" },
-];
+import { AddShoppingCart, AddShoppingCartSharp } from "@mui/icons-material";
+
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -43,7 +39,7 @@ function Navbar() {
   // ! Логика навбара
   const { user, handleLogOut } = useAuth();
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: "darkred" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <TheatersIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -93,13 +89,7 @@ function Navbar() {
               sx={{
                 display: { xs: "block", md: "none" },
               }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            ></Menu>
           </Box>
           <TheatersIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
@@ -128,7 +118,7 @@ function Navbar() {
               }}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Movies
+              Фильмы
             </Button>
             <Button
               onClick={() => {
@@ -137,7 +127,7 @@ function Navbar() {
               }}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Pricing
+              Платные фильмы
             </Button>
             <Button
               onClick={() => {
@@ -146,10 +136,23 @@ function Navbar() {
               }}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Favorites
+              Избранное
+            </Button>
+            <Button
+              onClick={() => {
+                handleCloseNavMenu();
+                navigate("/cart");
+              }}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Basket
             </Button>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
+            <IconButton>
+              <AddShoppingCart />
+            </IconButton>
+
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {user ? (

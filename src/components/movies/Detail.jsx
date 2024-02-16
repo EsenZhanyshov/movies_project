@@ -1,4 +1,4 @@
-import { Box, Button, Modal } from "@mui/material";
+import { Box, Button, Modal, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
 
 const Detail = (props) => {
@@ -20,26 +20,32 @@ const Detail = (props) => {
   const [likes, setLikes] = useState(0);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
+  const [movieId, setMovieId] = useState(null); // Хранение id текущего фильма
 
   useEffect(() => {
-    // Загрузка сохраненных комментариев из локального хранилища
-    const storedComments = JSON.parse(localStorage.getItem("comments"));
-    if (storedComments) {
-      setComments(storedComments);
-    }
+    // Получение сохраненных комментариев из локального хранилища по id фильма
+    const storedComments =
+      JSON.parse(localStorage.getItem(`comments_${movieId}`)) || [];
+    setComments(storedComments);
 
-    // Загрузка сохраненного количества лайков из локального хранилища
-    const storedLikes = JSON.parse(localStorage.getItem("likes"));
-    if (storedLikes) {
-      setLikes(storedLikes);
+    // Получение сохраненного количества лайков из локального хранилища по id фильма
+    const storedLikes =
+      JSON.parse(localStorage.getItem(`likes_${movieId}`)) || 0;
+    setLikes(storedLikes);
+  }, [movieId]);
+
+  useEffect(() => {
+    // Установка id текущего фильма при открытии детальной информации
+    if (open) {
+      setMovieId(elem.id);
     }
-  }, []);
+  }, [open, elem]);
 
   const handleLike = () => {
     // Увеличение количества лайков на 1
     setLikes(likes + 1);
-    // Сохранение количества лайков в локальное хранилище
-    localStorage.setItem("likes", JSON.stringify(likes + 1));
+    // Сохранение количества лайков в локальное хранилище по id фильма
+    localStorage.setItem(`likes_${movieId}`, JSON.stringify(likes + 1));
   };
 
   const handleCommentChange = (event) => {
@@ -50,8 +56,8 @@ const Detail = (props) => {
     // Добавление нового комментария в список комментариев
     const newComments = [...comments, comment];
     setComments(newComments);
-    // Сохранение обновленного списка комментариев в локальное хранилище
-    localStorage.setItem("comments", JSON.stringify(newComments));
+    // Сохранение обновленного списка комментариев в локальное хранилище по id фильма
+    localStorage.setItem(`comments_${movieId}`, JSON.stringify(newComments));
     setComment("");
   };
 
@@ -87,19 +93,30 @@ const Detail = (props) => {
             <Button onClick={handleLike} variant="outlined" color="primary">
               Лайк ({likes})
             </Button>
+            <Button
+              variant="contained"
+              color="error"
+              style={{ marginLeft: "10px" }}
+            >
+              Купить за {elem.price} сом
+            </Button>
           </div>
-          <div style={{ marginTop: 20 }}>
-            <textarea
+          <div
+            style={{ marginTop: "20px", display: "flex", alignItems: "center" }}
+          >
+            <TextField
               value={comment}
               onChange={handleCommentChange}
-              placeholder="Добавить комментарий"
-              rows={4}
-              cols={50}
+              label="Добавить комментарий"
+              multiline
+              fullWidth
+              variant="outlined"
             />
             <Button
               onClick={handleAddComment}
               variant="contained"
               color="secondary"
+              style={{ marginLeft: "10px" }}
             >
               Добавить комментарий
             </Button>
@@ -110,11 +127,6 @@ const Detail = (props) => {
               <p key={index}>{comment}</p>
             ))}
           </div>
-        </div>
-        <div style={{ marginTop: "auto" }}>
-          <Button variant="contained" color="error">
-            Купить за {elem.price} сом
-          </Button>
         </div>
       </Box>
     </Modal>
